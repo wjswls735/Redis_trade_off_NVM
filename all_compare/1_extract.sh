@@ -1,5 +1,5 @@
-clock1="1500 3400"
-clock2="DRAM_1500MHz PMDK_1500MHz DRAM_3400MHz PMDK_3400MHz"
+clock1="default1 3400"
+clock2="DRAM PMDK DRAM_3400MHz PMDK_3400MHz"
 threads="1 5 10 15 20"
 operation="sr sw"
 memory="dram nvm"
@@ -16,12 +16,12 @@ for op in $operation; do
         for cl1 in $clock1; do
             for me in $memory; do
                 if [[ $op == sr ]]; then
-                    cat thread_"$th"_"$me"_"$op"_$cl1.txt | grep "Gets" | awk '{print $2}' | tr "\n" " " >> $of
+                    cat thread_"$th"_"$me"_"$op"_"$cl1".txt | grep "Gets" | awk '{print $2}' | tr "\n" " " >> $of
 	            else
-                    cat thread_"$th"_"$me"_"$op"_$cl1.txt | grep "Sets" | awk '{print $2}' | tr "\n" " " >> $of
+                    cat thread_"$th"_"$me"_"$op"_"$cl1".txt | grep "Sets" | awk '{print $2}' | tr "\n" " " >> $of
                 fi
             done
-        done	
+         done	
         echo " " >> $of
-    done
+   done
 done
